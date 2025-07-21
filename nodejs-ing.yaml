@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nodjs-ing
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: www.exaplme.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nodejs-svc
+            port:
+              number: 3000
