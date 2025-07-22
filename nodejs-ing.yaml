@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: nodjs-ing
 spec:
-  ingressClassName: nginx
+  ingressClassName: webapprouting.kubernetes.azure.com
   rules:
   - host: www.exaplme.com
     http:
