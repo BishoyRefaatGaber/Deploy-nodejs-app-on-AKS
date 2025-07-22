@@ -1,0 +1,28 @@
+name: deploy express nodejs to AKS
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - "app/**"
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the repo
+        uses: actions/checkout@v4.2.2
+      - name: get the build number
+        id: get_version
+        run: |
+          version=$(cat current_version.txt)
+          next_version=$((version + 1))
+          echo "$next_version" > build_number.txt
+          echo "image_version=$next_version" >> $GITHUB_OUTPUT  
+      - name: check the version
+        run: echo "the new version is ${{ steps.get_version.outputs.image_version }}"    
+      # - name: build the image
+      #   uses: docker/build-push-action@v6.18.0
+      #   with: 
+      # - name: push the image
+      # - name: modify the nodejs-dep file  
+      # - name: apply the new image on AKS
