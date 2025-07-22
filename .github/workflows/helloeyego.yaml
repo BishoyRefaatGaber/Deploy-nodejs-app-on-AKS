@@ -47,13 +47,17 @@ jobs:
           username: 'secrets.USERNAME'
           password: 'secrets.PASSWORD'
 
-      - name: build the image
+      - name: build the image and push it
         uses: docker/build-push-action@v6.18.0
         with:
           context: .
-          push: true
+          # push: true
           tags: ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
-
-      # - name: push the image
-      # - name: modify the nodejs-dep file  
-      # - name: apply the new image on AKS
+ 
+      - name: apply the new image on AKS
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          manifests: 
+          - nodejs-dep.yaml
+          - nodejs-svc.yaml
+          - nodejs-ing.yaml
