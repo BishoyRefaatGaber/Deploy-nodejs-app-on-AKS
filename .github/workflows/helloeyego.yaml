@@ -16,7 +16,7 @@ jobs:
         run: |
           version=$(cat current_version.txt)
           next_version=$((version + 1))
-          echo "$next_version" > build_number.txt
+          echo "$next_version" > current_version.txt
           echo "image_version=$next_version" >> $GITHUB_OUTPUT  
       - name: check the version
         run: echo "the new version is ${{ steps.get_version.outputs.image_version }}"    
