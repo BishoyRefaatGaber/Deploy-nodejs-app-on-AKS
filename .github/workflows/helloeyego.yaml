@@ -40,6 +40,11 @@ jobs:
           git commit -m "CI: update version to ${{ steps.get_version.outputs.image_version }}" || echo "No changes to commit"
           git push
 
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: login to azure registry
         uses: azure/docker-login@v2
         with:
@@ -51,9 +56,19 @@ jobs:
         uses: docker/build-push-action@v6.18.0
         with:
           context: .
-          # push: true
+          push: true
           tags: ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
  
+
+
+      - name: Get AKS credentials
+        run: |
+          az aks get-credentials \
+            --resource-group eyego-task \
+            --name aks-task \
+            --overwrite-existing
+
+
       - name: apply the new image on AKS
         uses: Azure/k8s-deploy@v4.9
         with:
