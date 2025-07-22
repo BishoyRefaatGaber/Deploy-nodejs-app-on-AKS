@@ -39,6 +39,14 @@ jobs:
           git add current_version.txt nodejs-dep.yaml 
           git commit -m "CI: update version to ${{ steps.get_version.outputs.image_version }}" || echo "No changes to commit"
           git push
+
+      - name: login to azure registry
+        uses: azure/docker-login@v2
+        with:
+          login-server: '${{ secrets.LOGIN_SERVER }}'
+          username: 'secrets.USERNAME'
+          password: 'secrets.PASSWORD'
+
       # - name: build the image
       #   uses: docker/build-push-action@v6.18.0
       #   with:
