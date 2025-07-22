@@ -9,8 +9,10 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     steps:
+    
       - name: checkout the repo
         uses: actions/checkout@v4.2.2
+    
       - name: get the build number
         id: get_version
         run: |
@@ -18,6 +20,7 @@ jobs:
           next_version=$((version + 1))
           echo "$next_version" > current_version.txt
           echo "image_version=$next_version" >> $GITHUB_OUTPUT  
+     
       - name: check the version
         run: echo "the new version is ${{ steps.get_version.outputs.image_version }}" 
 
@@ -29,8 +32,8 @@ jobs:
           git add current_version.txt
           git commit -m "CI: update version to ${{ steps.get_version.outputs.image_version }}" || echo "No changes to commit"
           git push
+          echo "${{ variables.MYVARIABLE }}"
           
-
       # - name: build the image
       #   uses: docker/build-push-action@v6.18.0
       #   with: 
