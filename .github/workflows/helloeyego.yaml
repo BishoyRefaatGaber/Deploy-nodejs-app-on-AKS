@@ -32,7 +32,7 @@ jobs:
           git add current_version.txt
           git commit -m "CI: update version to ${{ steps.get_version.outputs.image_version }}" || echo "No changes to commit"
           git push
-          echo "${{ MYVARIABLE }}"
+          echo "${{ vars.MYVARIABLE }}"
           
       # - name: build the image
       #   uses: docker/build-push-action@v6.18.0
