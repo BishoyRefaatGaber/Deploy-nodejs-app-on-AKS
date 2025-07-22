@@ -47,9 +47,12 @@ jobs:
           username: 'secrets.USERNAME'
           password: 'secrets.PASSWORD'
 
-      # - name: build the image
-      #   uses: docker/build-push-action@v6.18.0
-      #   with:
+      - name: build the image
+        uses: docker/build-push-action@v6.18.0
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
 
       # - name: push the image
       # - name: modify the nodejs-dep file  
