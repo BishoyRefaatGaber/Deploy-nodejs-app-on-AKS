@@ -63,13 +63,16 @@ jobs:
 
       - name: Get AKS credentials
         run: |
-          az aks get-credentials --resource-group eyego-task --name aks-task --overwrite-existing
+          az aks get-credentials \
+            --resource-group eyego-task \
+            --name aks-task \
+            --overwrite-existing
 
 
       - name: apply the new image on AKS
         uses: Azure/k8s-deploy@v4.9
         with:
-          manifests: 
-          - nodejs-dep.yaml
-          - nodejs-svc.yaml
-          - nodejs-ing.yaml
+          manifests: |
+            nodejs-dep.yaml
+            nodejs-svc.yaml
+            nodejs-ing.yaml
