@@ -1,10 +1,14 @@
 name: deploy express nodejs to AKS
+# on:
+#   push:
+#     branches:
+#     - main
+#     paths:
+#     - "app/**"
+
 on:
-  push:
-    branches:
-    - main
-    paths:
-    - "app/**"
+  workflow_dispatch:
+
 jobs:
   deployment:
     runs-on: ubuntu-latest
@@ -32,7 +36,7 @@ jobs:
           git add current_version.txt
           git commit -m "CI: update version to ${{ steps.get_version.outputs.image_version }}" || echo "No changes to commit"
           git push
-          echo "${{ secrets.MYSECRET }}"
+
           
       # - name: build the image
       #   uses: docker/build-push-action@v6.18.0
