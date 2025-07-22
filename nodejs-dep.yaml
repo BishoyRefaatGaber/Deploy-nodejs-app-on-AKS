@@ -1,4 +1,4 @@
-apiVersion: apps/v4
+apiVersion: apps/v2
 kind: Deployment
 metadata:
   name: nodejs-dep
@@ -13,7 +13,7 @@ spec:
         type: nodejs-pod
     spec:
       containers:
-      - image: akscr2.azurecr.io/helloeyego:v1
+      - image: akscr2.azurecr.io/helloeyego:v2
         name: nodejs-cont
         ports:
         - containerPort: 3000
