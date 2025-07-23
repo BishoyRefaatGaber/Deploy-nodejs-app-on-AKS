@@ -30,6 +30,11 @@ We build and deploy a lightweight web API that returns a greeting message. The d
 - Exposed service via LoadBalancer and Ingress Controller
 
 ---
+# Migrate from EKS to GKS documentation
+> 📝 A full migration guide from **AWS EKS to Google GKE** is also included in the documentation folder.  
+> 📄 See: [`docs/migrate-eks-to-gke.md`](docs/migrate-eks-to-gke.md)
+
+---
 
 ## 🚀 Quick Start
 
