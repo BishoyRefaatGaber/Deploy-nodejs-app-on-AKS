@@ -44,11 +44,12 @@ jobs:
         uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+        run:  az acr login --name aksCR2
 
 
-      - name: login to ACR
-        run: |
-          az acr login --name aksCR2
+      # - name: login to ACR
+      #   run: |
+      #     az acr login --name aksCR2
 
       # - name: login to azure registry
       #   uses: azure/docker-login@v2
