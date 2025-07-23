@@ -60,7 +60,8 @@ jobs:
           push: true
           tags: ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
  
-
+      - name: set account subscribtion
+        run: az account set --subscription c2059966-8ddd-44a8-9ec2-89ab2630a8ba
 
       - name: Get AKS credentials
         run: |
