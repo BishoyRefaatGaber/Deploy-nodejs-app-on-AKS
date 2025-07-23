@@ -30,7 +30,7 @@ jobs:
 
 
       - name: update the version in the deployment file
-        run:  sed -i 's/v[0-9][0-9]*/v${{ steps.get_version.outputs.image_version }}/g' nodejs-dep.yaml         
+        run:  sed -i 's/:v[0-9][0-9]*/:v${{ steps.get_version.outputs.image_version }}/g' nodejs-dep.yaml         
 
       - name: Commit and push updated version
         run: |
