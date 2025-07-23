@@ -32,7 +32,7 @@ We build and deploy a lightweight web API that returns a greeting message. The d
 ---
 # Migrate from EKS to GKS documentation
 > 📝 A full migration guide from **AWS EKS to Google GKE** is also included in the documentation folder.  
-> 📄 See: [`Migrate from Amazon EKS to GKE.pdf`](migrate from EKS to GKS)
+> 📄 See: [Migrate from Amazon EKS to GKE (PDF)](./Migrate%20from%20Amazon%20EKS%20to%20GKE.pdf)
 
 ---
 
