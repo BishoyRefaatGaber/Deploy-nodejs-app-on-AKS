@@ -45,18 +45,24 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: login to azure registry
-        uses: azure/docker-login@v2
-        with:
-          login-server: '${{ secrets.LOGIN_SERVER }}'
-          username: 'secrets.USERNAME'
-          password: 'secrets.PASSWORD'
+
+      - name: login to ACR
+        run: |
+          az acr login --name aksCR2
+
+      # - name: login to azure registry
+      #   uses: azure/docker-login@v2
+      #   with:
+      #     login-server: '${{ secrets.LOGIN_SERVER }}'
+      #     username: 'secrets.USERNAME'
+      #     password: 'secrets.PASSWORD'
 
 
       - name: push the image to ACR
-        run: | 
-          docker build . -t ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
-          docker push ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
+        run: docker build . -t ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
+          
+      - name: push the image
+        run:  docker push ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
       # - name: build the image and push it
       #   uses: docker/build-push-action@v6.18.0
       #   with:
