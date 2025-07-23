@@ -40,10 +40,10 @@ jobs:
           git commit -m "CI: update version to ${{ steps.get_version.outputs.image_version }}" || echo "No changes to commit"
           git push
 
-      # - name: Login to Azure
-      #   uses: Azure/login@v1
-      #   with:
-      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: login to azure registry
         uses: azure/docker-login@v2
