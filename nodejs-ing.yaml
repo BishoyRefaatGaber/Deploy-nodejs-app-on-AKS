@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   rules:
-  - host: www.exaplme.com
+  - host: www.helloeyego.com
     http:
       paths:
       - path: /
