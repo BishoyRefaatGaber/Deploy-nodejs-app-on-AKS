@@ -53,7 +53,8 @@ jobs:
           password: 'secrets.PASSWORD'
 
 
-      - run: | 
+      - name: push the image to ACR
+        run: | 
           docker build . -t ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
           docker push ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
       # - name: build the image and push it
