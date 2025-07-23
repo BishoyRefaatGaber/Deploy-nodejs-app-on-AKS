@@ -52,27 +52,31 @@ jobs:
           username: 'secrets.USERNAME'
           password: 'secrets.PASSWORD'
 
-      - name: build the image and push it
-        uses: docker/build-push-action@v6.18.0
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
+
+      - run: | 
+          docker build . -t ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
+          docker push ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
+      # - name: build the image and push it
+      #   uses: docker/build-push-action@v6.18.0
+      #   with:
+      #     context: .
+      #     push: true
+      #     tags: ${{ secrets.LOGIN_SERVER }}/helloeyego:v${{ steps.get_version.outputs.image_version }}
  
 
 
-      - name: Get AKS credentials
-        run: |
-          az aks get-credentials \
-            --resource-group eyego-task \
-            --name aks-task \
-            --overwrite-existing
+      # - name: Get AKS credentials
+      #   run: |
+      #     az aks get-credentials \
+      #       --resource-group eyego-task \
+      #       --name aks-task \
+      #       --overwrite-existing
 
 
-      - name: apply the new image on AKS
-        uses: Azure/k8s-deploy@v4.9
-        with:
-          manifests: |
-            nodejs-dep.yaml
-            nodejs-svc.yaml
-            nodejs-ing.yaml
+      # - name: apply the new image on AKS
+      #   uses: Azure/k8s-deploy@v4.9
+      #   with:
+      #     manifests: |
+      #       nodejs-dep.yaml
+      #       nodejs-svc.yaml
+      #       nodejs-ing.yaml
